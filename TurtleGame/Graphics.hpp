@@ -1,6 +1,8 @@
 #pragma once
 #include <map>
 #include <SFML/Graphics.hpp>
+
+
 namespace Olga {
 	class Graphics
 	{
@@ -13,6 +15,9 @@ namespace Olga {
 
 		void LoadFont(std::string Name, std::string FileName); //Load Font from file
 		sf::Font& GetFont(std::string Name); //return refernce to texture from the map
+
+		bool IsItemClicked(sf::Sprite, sf::Mouse::Button, sf::RenderWindow&); //checking if we clicked on screen button
+		//sf::Vector2i GetMousePosition(sf::RenderWindow& window); //Returning vector (x,y) with location
 	private:
 		std::map<std::string, sf::Texture> TexturesMap;
 		std::map<std::string, sf::Font> FontMap;

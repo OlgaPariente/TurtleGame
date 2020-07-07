@@ -2,6 +2,6 @@
 
 int main()
 {
-	Olga::Game(440,360, "Turtle Game"); //Creating game object
+	Olga::Game(697,468, "Turtle Game"); //Creating game object
 	return 1;
 }

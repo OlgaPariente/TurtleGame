@@ -133,12 +133,14 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="LogoState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="LogoState.hpp" />
+    <ClInclude Include="MenuState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
   </ItemGroup>

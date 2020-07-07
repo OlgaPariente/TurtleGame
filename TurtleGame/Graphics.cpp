@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Graphics.hpp"
+
 namespace Olga {
 	void Graphics::LoadTexture(std::string name, std::string file)
 	{
@@ -28,4 +29,22 @@ namespace Olga {
 	{
 		return this->FontMap.at(name);
 	}
+	//--------------------------------------------------------------//
+	bool Graphics::IsItemClicked(sf::Sprite Item, sf::Mouse::Button b, sf::RenderWindow& w) //PlayB,Left mouse B, window
+	{
+		if (sf::Mouse::isButtonPressed(b)) //we mouse was pressed left Btn
+		{
+			sf::IntRect PlayB(Item.getPosition().x, Item.getPosition().y, Item.getGlobalBounds().width, Item.getGlobalBounds().height);//creating rect for btn representation
+			if (PlayB.contains(sf::Mouse::getPosition(w))) //If the rectangle contains the mouse position point than was pressed
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	//--------------------------------------------------------------//
+	/*sf::Vector2i GetMousePosition(sf::RenderWindow& window)
+	{
+		return sf::Mouse::getPosition(window);
+	}*/
 }

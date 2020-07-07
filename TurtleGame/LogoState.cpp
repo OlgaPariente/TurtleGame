@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include "MenuState.hpp"
+
 namespace Olga {
 	LogoState::LogoState(GameManagerPtr p) : GameManagPtr(p) //copy pointer in constructor
 	{
@@ -11,6 +13,7 @@ namespace Olga {
 	{
 		this->GameManagPtr->GraphicManag.LoadTexture("Logo State", "C:/Users/USER/Desktop/MyGame/Logo.png"); //Saving texture
 		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("Logo State"));
+		background.setPosition(130,55);
 	}
 	//---------------------------------------------------------------//
 	void LogoState::HandleInput()
@@ -30,7 +33,7 @@ namespace Olga {
 	{
 		if (this->clock.getElapsedTime().asSeconds() > 3.0f) //switch to menu
 		{
-			//this->GameManagPtr->StateManag.AddState(StateRef(new Menu(GameManagPtr, true)));
+			this->GameManagPtr->StateManag.AddState(StateRef(new MenuState(GameManagPtr)),true);
 
 
 		}
@@ -39,7 +42,7 @@ namespace Olga {
 
 	void LogoState::Draw(float fps) //Drawing the state
 	{
-		this->GameManagPtr->WindowGame.clear(sf::Color::Red);
+		this->GameManagPtr->WindowGame.clear(sf::Color::White);
 		this->GameManagPtr->WindowGame.draw(this->background);
 		this->GameManagPtr->WindowGame.display();
 	}
