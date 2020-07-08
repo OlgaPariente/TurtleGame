@@ -38,7 +38,7 @@ namespace Olga {
 				Accumulator -= fps;
 			}
 
-			this->GamePtr->StateManag.getActiveState()->Draw(fps);
+			this->GamePtr->StateManag.getActiveState()->Draw(fps); //drawing state
 		}
 	}
 }

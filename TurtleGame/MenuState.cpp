@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include <sstream>
-#include "LogoState.hpp"
+#include "GameState.hpp"
 
 namespace Olga {
 
@@ -33,9 +33,9 @@ namespace Olga {
 			{
 				this->GameManagPtr->WindowGame.close();
 			}
-			if (this->GameManagPtr->GraphicManag.IsItemClicked(this->PlayBtn,sf::Mouse::Left,this->GameManagPtr->WindowGame))
+			if (this->GameManagPtr->GraphicManag.IsItemClicked(this->PlayBtn,sf::Mouse::Left,this->GameManagPtr->WindowGame)) //If start clicked
 			{
-				this->GameManagPtr->StateManag.AddState(StateRef(new LogoState(GameManagPtr)), true);
+				this->GameManagPtr->StateManag.AddState(StateRef(new GameState(GameManagPtr)), true);
 			}
 		}
 	}
