@@ -25,13 +25,13 @@ namespace Olga {
 		this->ground = new Ground(GameManagPtr);
 		//-----------------------------------------------------------------------//
 		//-----------------------Turtle-----------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle1", "C:/Users/USER/Desktop/MyGame/Turtle1.png"); //Saving texture
+		//this->GameManagPtr->GraphicManag.LoadTexture("Turtle1", "C:/Users/USER/Desktop/MyGame/Turtle1.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2", "C:/Users/USER/Desktop/MyGame/Turtle2.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle3", "C:/Users/USER/Desktop/MyGame/Turtle3.png"); //Saving texture
 		this->turt = new Turtle(GameManagPtr);
 	}
 	//---------------------------------------------------------------//
-	void GameState::HandleInput()
+	void GameState::HandleInput(float fps)
 	{
 		sf::Event event; //event to be returned from pollevent. (sending by ref and saving the event in this var)
 
@@ -41,6 +41,22 @@ namespace Olga {
 			{
 				this->GameManagPtr->WindowGame.close();
 			}
+			//--------------------------------------------//
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If we pressed * ----> *
+			{
+				
+				this->turt->ReturnTurtleSprite().move(5,0);
+				this->turt->SetLocation(this->turt->ReturnLocation().x + 5, this->turt->ReturnLocation().y);
+				this->turt->AnimateTurtle(fps);
+			}
+			//--------------------------------------------//
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //If we pressed * up *
+			{
+				this->turt->SetTurtleState(2);
+				this->turt->JumpUpdate(fps);
+				this->turt->AnimateTurtle(fps);
+			}
+			//--------------------------------------------//
 		}
 	}
 	//---------------------------------------------------------------//
@@ -49,7 +65,7 @@ namespace Olga {
 		//Choosing randomally ground type
 		std::string name;
 
-		for (int i = 0; i < 4; i++) 
+		/*for (int i = 0; i < 4; i++) 
 		{
 			switch (rand() % 3) {
 			case 0: name = "ground1"; break;
@@ -59,10 +75,11 @@ namespace Olga {
 			}
 		}
 
-		if(name!="none")this->ground->CreateGround(name);
+		if(name!="none")this->ground->CreateGround(name);*/
 		//Sleep(50);
 
-		turt->AnimateTurtle(fps);
+		this->turt->JumpUpdate(fps);
+		
 	}
 	//---------------------------------------------------------------//
 

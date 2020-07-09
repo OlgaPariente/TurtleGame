@@ -24,7 +24,7 @@ namespace Olga {
 		PlayBtn.setPosition((697 / 2) - (PlayBtn.getGlobalBounds().width / 2), (550 / 2) - (PlayBtn.getGlobalBounds().height / 2));
 	}
 	//------------------------------------------------------------//
-	void MenuState::HandleInput()
+	void MenuState::HandleInput(float fps)
 	{
 		sf::Event event;
 		while (this->GameManagPtr->WindowGame.pollEvent(event))
@@ -33,10 +33,12 @@ namespace Olga {
 			{
 				this->GameManagPtr->WindowGame.close();
 			}
+			//--------------------------------------------//
 			if (this->GameManagPtr->GraphicManag.IsItemClicked(this->PlayBtn,sf::Mouse::Left,this->GameManagPtr->WindowGame)) //If start clicked
 			{
 				this->GameManagPtr->StateManag.AddState(StateRef(new GameState(GameManagPtr)), true);
 			}
+			//-------------------------------------------//
 		}
 	}
 

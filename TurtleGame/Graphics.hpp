@@ -17,6 +17,7 @@ namespace Olga {
 		sf::Font& GetFont(std::string Name); //return refernce to texture from the map
 
 		bool IsItemClicked(sf::Sprite, sf::Mouse::Button, sf::RenderWindow&); //checking if we clicked on screen button
+		//bool IsRightArrowClicked(sf::Sprite,sf::RenderWindow&);
 		//sf::Vector2i GetMousePosition(sf::RenderWindow& window); //Returning vector (x,y) with location
 	private:
 		std::map<std::string, sf::Texture> TexturesMap;

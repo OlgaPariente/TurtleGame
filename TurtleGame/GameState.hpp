@@ -16,7 +16,7 @@ namespace Olga
 	public:
 		GameState(GameManagerPtr); //Recieving shared pointer to the structure, copy the address of the ptr
 		void InitState();
-		void HandleInput();
+		void HandleInput(float fps);
 		void Update(float fps);
 		void Draw(float fps);
 	private:

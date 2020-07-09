@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Graphics.hpp"
 
+
 namespace Olga {
 	void Graphics::LoadTexture(std::string name, std::string file)
 	{
@@ -41,7 +42,10 @@ namespace Olga {
 			}
 		}
 		return false;
+
 	}
+	//--------------------------------------------------------------//
+
 	//--------------------------------------------------------------//
 	/*sf::Vector2i GetMousePosition(sf::RenderWindow& window)
 	{

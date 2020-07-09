@@ -16,7 +16,7 @@ namespace Olga {
 		background.setPosition(130,55);
 	}
 	//---------------------------------------------------------------//
-	void LogoState::HandleInput()
+	void LogoState::HandleInput(float fps)
 	{
 		sf::Event event; //event to be returned from pollevent. (sending by ref and saving the event in this var)
 

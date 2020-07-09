@@ -33,7 +33,7 @@ namespace Olga {
 
 			while (Accumulator >= fps)
 			{
-				this->GamePtr->StateManag.getActiveState()->HandleInput();
+				this->GamePtr->StateManag.getActiveState()->HandleInput(fps);
 				this->GamePtr->StateManag.getActiveState()->Update(fps);
 				Accumulator -= fps;
 			}
