@@ -10,14 +10,16 @@ namespace Olga
 
 	Turtle::Turtle(GameManagerPtr p) :ManagePtr(p)
 	{
-		this->AnimationIterator = 0;
+		this->AnimationIteratorFlag = 0;
 
 		//-------------Saving turtles in the vector:
-		//this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle1"));
+		
 		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle2"));
 		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle3"));
+		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle2Reverse"));
+		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle3Reverse"));
 		//-----------------------------Putting different turtle any time---------------------//
-		this->MyTurtSprite.setTexture(this->AnimationTurtles.at(AnimationIterator)); //First turtle
+		this->MyTurtSprite.setTexture(this->AnimationTurtles.at(AnimationIteratorFlag)); //First turtle
 		//----------------------------------------------------------------------------------//
 		this->CurrentLocation.x = 15;
 		this->CurrentLocation.y = 250;
@@ -35,20 +37,41 @@ namespace Olga
 			this->ManagePtr->WindowGame.draw(this->MyTurtSprite); //drawing to screen
 	}
 	//-------------------------------------------------------------------------------------//
-	void Turtle::AnimateTurtle(float fps)
+	void Turtle::AnimateTurtleForward() //flag=0,1,2,3
 	{
+		
 		if (this->clock.getElapsedTime().asSeconds() > 0.6f/AnimationTurtles.size()) //Each frame we have the same time
 		{
-			if (AnimationIterator < AnimationTurtles.size() - 1) //if we have more frames in the array
+			if (AnimationIteratorFlag < 1) //if we have more frames in the array
 			{
-				AnimationIterator++; //Moving to the next frame
+				AnimationIteratorFlag++; //Moving to the next frame
 			}
 			else
 			{
-				AnimationIterator = 0; //else we go back to the first turtle
+				AnimationIteratorFlag = 0; //else we go back to the first turtle
 			}
 
-			MyTurtSprite.setTexture(AnimationTurtles.at(AnimationIterator));
+			MyTurtSprite.setTexture(AnimationTurtles.at(AnimationIteratorFlag));
+			clock.restart(); //for each frame new clock measure
+
+		}
+	}
+	//-----------------------------------------------------------------------------------//
+	void Turtle::AnimateTurtleBack() //flag=0,1,2,3
+	{
+		
+		if (this->clock.getElapsedTime().asSeconds() > 0.6f / AnimationTurtles.size()) //Each frame we have the same time
+		{
+			if (AnimationIteratorFlag < 3) //if we have more frames in the array
+			{
+				AnimationIteratorFlag++; //Moving to the next frame
+			}
+			else
+			{
+				AnimationIteratorFlag = 2; //else we go back to the first turtle
+			}
+
+			MyTurtSprite.setTexture(AnimationTurtles.at(AnimationIteratorFlag));
 			clock.restart(); //for each frame new clock measure
 
 		}
@@ -73,11 +96,12 @@ namespace Olga
 	//--------------------------------------------------------------------------------//
 	void Turtle::JumpUpdate(float fps)
 	{	
-		if (this->TurtleState == 2)//Jump pressed first time
+		if (this->TurtleState == 2 && this->CurrentLocation.y==250)//Jump pressed first time
 		{
 			//std::cout << "pos:\n" << this->MyTurtSprite.getPosition().y; //250
-			this->Velocity.y = -50;
-			this->MyTurtSprite.move(0, Velocity.y); //going to 80 neg
+			this->Velocity.y = -40;
+			this->MyTurtSprite.move(0, Velocity.y); //going to 40 neg
+			this->CurrentLocation.y = this->CurrentLocation.y - this->Velocity.y;
 		}
 		
 		if (this->JumpClock.getElapsedTime().asSeconds() > 0.40 && this->TurtleState==2)
@@ -89,7 +113,7 @@ namespace Olga
 		if (this->TurtleState == 3) //falling now
 		{
 		
-			this->MyTurtSprite.move(0,this->Velocity.y); //going to 80 neg
+			this->MyTurtSprite.move(0,this->Velocity.y); //going to 50 positive
 			if (this->MyTurtSprite.getPosition().y < 250) //If im up
 			{
 				this->Velocity.y += Gravity; //starting falling down
@@ -98,9 +122,10 @@ namespace Olga
 			else // if im on the ground
 			{
 				//this->MyTurtSprite.setPosition(MyTurtSprite.getPosition().x, 250);
-				this->Velocity.y = 5; //restart
+				
 				this->CurrentLocation.x = MyTurtSprite.getPosition().x;
-				this->CurrentLocation.y = MyTurtSprite.getPosition().y;
+				this->CurrentLocation.y = 250;
+				this->MyTurtSprite.setPosition(MyTurtSprite.getPosition().x,250);
 				this->TurtleState = 1;//ground
 			}
 		
@@ -118,6 +143,19 @@ namespace Olga
 	void Turtle::SetTurtleState(int state)
 	{
 		 this->TurtleState=state;
+
+	}
+	//--------------------------------------------------------------------------------//
+	void Turtle::SetForwardState(int s)
+	{
+		this->forwardState = s;
+	
+	}
+
+	//--------------------------------------------------------------------------------//
+	int Turtle::GetForwardState()
+	{
+		return this->forwardState;
 
 	}
 }

@@ -40,7 +40,7 @@ namespace Olga {
 	}
 	//---------------------------------------------------------------//
 
-	void LogoState::Draw(float fps) //Drawing the state
+	void LogoState::Draw(int f) //Drawing the state
 	{
 		this->GameManagPtr->WindowGame.clear(sf::Color::White);
 		this->GameManagPtr->WindowGame.draw(this->background);

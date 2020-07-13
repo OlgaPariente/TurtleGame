@@ -12,7 +12,7 @@ namespace Olga {
 		void InitState();
 		void HandleInput(float);
 		void Update(float fps);
-		void Draw(float fps);
+		void Draw(int);
 	private:
 		GameManagerPtr GameManagPtr;
 		sf::Clock clock;

@@ -11,7 +11,7 @@ namespace Olga
 		void InitState();
 		void HandleInput(float);
 		void Update(float fps);
-		void Draw(float fps);
+		void Draw(int fps);
 	private:
 		GameManagerPtr GameManagPtr;
 		sf::Sprite Background;	

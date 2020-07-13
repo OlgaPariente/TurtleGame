@@ -49,7 +49,7 @@ namespace Olga {
 	
 	}
 	//------------------------------------------------------------//
-	void MenuState::Draw(float)
+	void MenuState::Draw(int)
 	{
 		this->GameManagPtr->WindowGame.clear(sf::Color::Green);
 		this->GameManagPtr->WindowGame.draw(this->Background);

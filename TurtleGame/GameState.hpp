@@ -18,13 +18,18 @@ namespace Olga
 		void InitState();
 		void HandleInput(float fps);
 		void Update(float fps);
-		void Draw(float fps);
+		void Draw(int);
+		void Drawback();
 	private:
 		GameManagerPtr GameManagPtr;
 		sf::Clock clock;
 		sf::Sprite background;
+		sf::Sprite background2;
 		Ground* ground;
 		Turtle* turt;
+		sf::View view;
+		sf::Vector2f posi;
+		
 	};
 
 }

@@ -12,15 +12,19 @@ namespace Olga
 		~Turtle();
 
 		void DrawTurtle(); //to screen
-		void AnimateTurtle(float);
+		void AnimateTurtleForward();
+		void AnimateTurtleBack();
 		sf::Sprite& ReturnTurtleSprite();
 		sf::Vector2f& ReturnLocation();
 		void SetLocation(float x, float y);
 		void JumpUpdate(float fps);
 		int GetTurtleState();
 		void SetTurtleState(int);
+		void SetForwardState(int);
+		int GetForwardState();
 	private:
-		unsigned int AnimationIterator;
+		int AnimationIteratorFlag;
+		int forwardState;
 		GameManagerPtr ManagePtr;
 		std::vector<sf::Texture> AnimationTurtles;
 		sf::Sprite MyTurtSprite;

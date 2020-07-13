@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "LogoState.hpp"
+#include <Windows.h>
 
 namespace Olga {
 	Game::Game(int width, int height, std::string title)
@@ -16,6 +17,7 @@ namespace Olga {
 		float FrameTime;
 		float CurrentTime = this->clock.getElapsedTime().asSeconds();
 		float Accumulator = 0.0f;
+		int counter = 0;
 
 		while (this->GamePtr->WindowGame.isOpen())
 		{
@@ -37,8 +39,9 @@ namespace Olga {
 				this->GamePtr->StateManag.getActiveState()->Update(fps);
 				Accumulator -= fps;
 			}
-
-			this->GamePtr->StateManag.getActiveState()->Draw(fps); //drawing state
+			
+			this->GamePtr->StateManag.getActiveState()->Draw(counter); //drawing state
+			
 		}
 	}
 }

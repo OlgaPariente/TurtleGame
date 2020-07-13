@@ -16,7 +16,9 @@ namespace Olga {
 		//-----------------------Background---------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("back", "C:/Users/USER/Desktop/MyGame/background.jpg"); //Saving texture
 		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("back"));
+		this->GameManagPtr->GraphicManag.GetTexture("back").setRepeated(true);
 		this->background.setScale(0.98, 1.);
+		background.setTextureRect({ 0,0,3465,468 });
 		//-----------------------------------------------------------------------//
 		//-----------------------Ground-----------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("ground3", "C:/Users/USER/Desktop/MyGame/ground3.png"); //Saving texture
@@ -25,14 +27,23 @@ namespace Olga {
 		this->ground = new Ground(GameManagPtr);
 		//-----------------------------------------------------------------------//
 		//-----------------------Turtle-----------------------------------------//
-		//this->GameManagPtr->GraphicManag.LoadTexture("Turtle1", "C:/Users/USER/Desktop/MyGame/Turtle1.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2", "C:/Users/USER/Desktop/MyGame/Turtle2.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle3", "C:/Users/USER/Desktop/MyGame/Turtle3.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2Reverse", "C:/Users/USER/Desktop/MyGame/Turtle2Reverse.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Turtle3Reverse", "C:/Users/USER/Desktop/MyGame/Turtle3Reverse.png");
 		this->turt = new Turtle(GameManagPtr);
+		//---------------------------------------------------------------------//
+		//-------------------------Scrolling background------------------------//
+		view.reset(sf::FloatRect(0,0,697,468)); //Screen
+		
+		view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f)); //Full screen rectangle
+		this->posi.x = 697 / 2;
+		this->posi.y = 468 / 2;
 	}
 	//---------------------------------------------------------------//
 	void GameState::HandleInput(float fps)
 	{
+		
 		sf::Event event; //event to be returned from pollevent. (sending by ref and saving the event in this var)
 
 		while (this->GameManagPtr->WindowGame.pollEvent(event)) //return false when the event queue is empty. else true
@@ -47,16 +58,25 @@ namespace Olga {
 				
 				this->turt->ReturnTurtleSprite().move(5,0);
 				this->turt->SetLocation(this->turt->ReturnLocation().x + 5, this->turt->ReturnLocation().y);
-				this->turt->AnimateTurtle(fps);
+				this->turt->AnimateTurtleForward();
+				this->turt->SetForwardState(1);
 			}
 			//--------------------------------------------//
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //If we pressed * up *
 			{
 				this->turt->SetTurtleState(2);
 				this->turt->JumpUpdate(fps);
-				this->turt->AnimateTurtle(fps);
+				if(this->turt->GetForwardState()==1)this->turt->AnimateTurtleForward();
+				else this->turt->AnimateTurtleBack();
 			}
 			//--------------------------------------------//
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If we pressed * Left *
+			{
+				this->turt->ReturnTurtleSprite().move(-5, 0);
+				this->turt->SetLocation(this->turt->ReturnLocation().x - 5, this->turt->ReturnLocation().y);
+				this->turt->AnimateTurtleBack();
+				this->turt->SetForwardState(0);
+			}
 		}
 	}
 	//---------------------------------------------------------------//
@@ -83,12 +103,27 @@ namespace Olga {
 	}
 	//---------------------------------------------------------------//
 
-	void GameState::Draw(float fps) //Drawing the state
+	void GameState::Draw(int index) //Drawing the state
 	{
-		this->GameManagPtr->WindowGame.clear(sf::Color::White);
-		this->GameManagPtr->WindowGame.draw(this->background); //printing the background
+			
+			if (this->turt->ReturnTurtleSprite().getPosition().x + 80 > 697 / 2) //If the turtle go right and get closer to the end of the screen
+			{
+				this->posi.x = this->turt->ReturnTurtleSprite().getPosition().x + 80;
+				
+			}
+			else
+			{
+				this->posi.x = 697 / 2;
+			}
+			
+			view.setCenter(posi);
+			this->GameManagPtr->WindowGame.setView(view);
+		
+		this->GameManagPtr->WindowGame.clear(sf::Color::Red);
+		this->GameManagPtr->WindowGame.draw(this->background);
 		this->ground->DrawGround(); //printing the ground
-		this->turt->DrawTurtle();
+		this->turt->DrawTurtle();	
 		this->GameManagPtr->WindowGame.display();
+		
 	}
 }
