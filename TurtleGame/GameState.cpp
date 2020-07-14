@@ -24,7 +24,8 @@ namespace Olga {
 		this->GameManagPtr->GraphicManag.LoadTexture("ground3", "C:/Users/USER/Desktop/MyGame/ground3.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("ground2", "C:/Users/USER/Desktop/MyGame/ground2.png"); //Saving texture
 		this->GameManagPtr->GraphicManag.LoadTexture("ground1", "C:/Users/USER/Desktop/MyGame/ground1.png"); //Saving texture
-		this->ground = new Ground(GameManagPtr);
+		this->ground1 = new Ground(GameManagPtr);
+		ground1->CreateGround();
 		//-----------------------------------------------------------------------//
 		//-----------------------Turtle-----------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2", "C:/Users/USER/Desktop/MyGame/Turtle2.png"); //Saving texture
@@ -82,21 +83,10 @@ namespace Olga {
 	//---------------------------------------------------------------//
 	void GameState::Update(float fps) //Automatically updates of the game
 	{
-		//Choosing randomally ground type
-		std::string name;
+		
 
-		/*for (int i = 0; i < 4; i++) 
-		{
-			switch (rand() % 3) {
-			case 0: name = "ground1"; break;
-			case 1: name = "ground2"; break;
-			case 2: name = "ground3"; break;
-			case 3: name = "none"; break;
-			}
-		}
-
-		if(name!="none")this->ground->CreateGround(name);*/
-		//Sleep(50);
+		
+			
 
 		this->turt->JumpUpdate(fps);
 		
@@ -121,7 +111,7 @@ namespace Olga {
 		
 		this->GameManagPtr->WindowGame.clear(sf::Color::Red);
 		this->GameManagPtr->WindowGame.draw(this->background);
-		this->ground->DrawGround(); //printing the ground
+		this->ground1->DrawGround();
 		this->turt->DrawTurtle();	
 		this->GameManagPtr->WindowGame.display();
 		

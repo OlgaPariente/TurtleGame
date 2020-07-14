@@ -25,7 +25,7 @@ namespace Olga
 		sf::Clock clock;
 		sf::Sprite background;
 		sf::Sprite background2;
-		Ground* ground;
+		Ground* ground1;
 		Turtle* turt;
 		sf::View view;
 		sf::Vector2f posi;
