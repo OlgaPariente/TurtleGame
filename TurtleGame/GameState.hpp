@@ -29,7 +29,6 @@ namespace Olga
 		Turtle* turt;
 		sf::View view;
 		sf::Vector2f posi;
-		
 	};
 
 }

@@ -19,7 +19,10 @@ void Ground::CreateGround()
 	
 	//Choosing randomally ground type
 	std::string name;
-	for (int i = 0; i < 2; i++) //8 random grounds in the whole game 0,1,2
+	int Locax = 500;
+	int Locay = 300;
+	srand(time(NULL));
+	for (int i = 0; i < 5; i++) //8 random grounds in the whole game 0,1,2
 	{
 		
 		switch (rand() % 3) {
@@ -27,13 +30,16 @@ void Ground::CreateGround()
 		case 1: name = "ground2"; break;
 		case 2: name = "ground3"; break;
 		}
-
-		ground.setTexture(this->ManagePtr->GraphicManag.GetTexture(name)); //ground sprite
-		int X = (rand() % 2000) + 100;
-		ground.setPosition(X, 250);
+		
 		this->Grounds.push_back(ground);
-	}
+		this->Grounds.at(i).setTexture(this->ManagePtr->GraphicManag.GetTexture(name)); //ground sprite
+		//int X = () + 100;
+		//int Y = (rand() % (300-250+1)+250);
+		this->Grounds.at(i).setPosition(Locax, Locay);
+		Locax += 500;
+		Locay -= 40;
 	
+	}
 }
 //---------------------------------------------//
 void Ground::DrawGround()

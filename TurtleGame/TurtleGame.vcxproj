@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fruits.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Turtle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fruits.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameState.hpp" />
     <ClInclude Include="Graphics.hpp" />

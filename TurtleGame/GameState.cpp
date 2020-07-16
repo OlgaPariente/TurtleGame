@@ -28,10 +28,7 @@ namespace Olga {
 		ground1->CreateGround();
 		//-----------------------------------------------------------------------//
 		//-----------------------Turtle-----------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2", "C:/Users/USER/Desktop/MyGame/Turtle2.png"); //Saving texture
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle3", "C:/Users/USER/Desktop/MyGame/Turtle3.png"); //Saving texture
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle2Reverse", "C:/Users/USER/Desktop/MyGame/Turtle2Reverse.png");
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle3Reverse", "C:/Users/USER/Desktop/MyGame/Turtle3Reverse.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Turtle", "C:/Users/USER/Desktop/MyGame/Turtle.png"); //Saving texture
 		this->turt = new Turtle(GameManagPtr);
 		//---------------------------------------------------------------------//
 		//-------------------------Scrolling background------------------------//
@@ -54,11 +51,13 @@ namespace Olga {
 				this->GameManagPtr->WindowGame.close();
 			}
 			//--------------------------------------------//
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If we pressed * ----> *
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If we pressed * Right *
 			{
-				
-				this->turt->ReturnTurtleSprite().move(5,0);
-				this->turt->SetLocation(this->turt->ReturnLocation().x + 5, this->turt->ReturnLocation().y);
+				if (this->turt->GetTurtleState() == 3 ||this->turt->GetTurtleState()==2) //if the turtle is falling
+				{
+					this->turt->SetHorizontalFlag(1); //right pressed in turtle falling
+				}
+				this->turt->MoveTurtleSprite();
 				this->turt->AnimateTurtleForward();
 				this->turt->SetForwardState(1);
 			}
@@ -67,13 +66,12 @@ namespace Olga {
 			{
 				this->turt->SetTurtleState(2);
 				this->turt->JumpUpdate(fps);
-				if(this->turt->GetForwardState()==1)this->turt->AnimateTurtleForward();
-				else this->turt->AnimateTurtleBack();
 			}
 			//--------------------------------------------//
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If we pressed * Left *
 			{
-				this->turt->ReturnTurtleSprite().move(-5, 0);
+
+				//this->turt->ReturnTurtleSprite().move(-5, 0);
 				this->turt->SetLocation(this->turt->ReturnLocation().x - 5, this->turt->ReturnLocation().y);
 				this->turt->AnimateTurtleBack();
 				this->turt->SetForwardState(0);
@@ -83,11 +81,6 @@ namespace Olga {
 	//---------------------------------------------------------------//
 	void GameState::Update(float fps) //Automatically updates of the game
 	{
-		
-
-		
-			
-
 		this->turt->JumpUpdate(fps);
 		
 	}
@@ -99,7 +92,6 @@ namespace Olga {
 			if (this->turt->ReturnTurtleSprite().getPosition().x + 80 > 697 / 2) //If the turtle go right and get closer to the end of the screen
 			{
 				this->posi.x = this->turt->ReturnTurtleSprite().getPosition().x + 80;
-				
 			}
 			else
 			{
@@ -112,7 +104,7 @@ namespace Olga {
 		this->GameManagPtr->WindowGame.clear(sf::Color::Red);
 		this->GameManagPtr->WindowGame.draw(this->background);
 		this->ground1->DrawGround();
-		this->turt->DrawTurtle();	
+		this->turt->DrawTurtle();
 		this->GameManagPtr->WindowGame.display();
 		
 	}

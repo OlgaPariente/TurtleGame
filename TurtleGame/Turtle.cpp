@@ -11,38 +11,69 @@ namespace Olga
 	Turtle::Turtle(GameManagerPtr p) :ManagePtr(p)
 	{
 		this->AnimationIteratorFlag = 0;
-
+		this->TurtleState = 1; //ground
 		//-------------Saving turtles in the vector:
-		
-		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle2"));
-		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle3"));
-		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle2Reverse"));
-		this->AnimationTurtles.push_back(this->ManagePtr->GraphicManag.GetTexture("Turtle3Reverse"));
-		//-----------------------------Putting different turtle any time---------------------//
-		this->MyTurtSprite.setTexture(this->AnimationTurtles.at(AnimationIteratorFlag)); //First turtle
-		//----------------------------------------------------------------------------------//
-		this->CurrentLocation.x = 15;
+		this->CurrentLocation.x = 100;
 		this->CurrentLocation.y = 250;
-		this->MyTurtSprite.setPosition(this->CurrentLocation);
+		//-------------------------First Turtle--------------------------------//
+		this->CreateTurtle(2325, 1700, 213, 293);
+		//-------------------------Second Turtle--------------------------------//
+		this->CreateTurtle(2764, 1700, 213, 293);
+		//-------------------------Third Turtle--------------------------------//
+		this->CreateTurtle(2977,1700,213,293);
+		//-------------------------Jump Turtle--------------------------------//
+		this->CreateTurtleJump(1729, 2000, 230, 330);
+		//-----------------------------Putting different turtle any time---------------------//
+		this->MyTurtSprite=this->AnimationTurtles.at(AnimationIteratorFlag); //First turtle
+		//----------------------------------------------------------------------------------//
 		this->Velocity.x = 0;
 		this->Velocity.y = 5;
 		//----------------------------------------------------------------------------------//
-	
-		//---------------------------------------------------------------------------------//
+	}
+	//--------------------------------------------------------------------------------------//
+	void Turtle::CreateTurtle(int left, int top,int width, int height)
+	{
+		this->MyTurtSprite.setTexture(this->ManagePtr->GraphicManag.GetTexture("Turtle")); //Turtles sheet
+		this->rectSourceSprite.left = left;
+		this->rectSourceSprite.top = top;
+		this->rectSourceSprite.width = width;
+		this->rectSourceSprite.height = height;
+		this->MyTurtSprite.setTextureRect(rectSourceSprite); //setting the spesific turtle to the sprite
+		this->MyTurtSprite.setScale(-0.4, 0.4);
+		this->MyTurtSprite.setPosition(CurrentLocation);
+		this->AnimationTurtles.push_back(this->MyTurtSprite);
+	}
+	//--------------------------------------------------------------------------------------//
+	void Turtle::CreateTurtleJump(int left, int top, int width, int height)
+	{
+		this->TurtleJump.setTexture(this->ManagePtr->GraphicManag.GetTexture("Turtle")); //Turtles sheet
+		this->rectSourceSprite.left = left;
+		this->rectSourceSprite.top = top;
+		this->rectSourceSprite.width = width;
+		this->rectSourceSprite.height = height;
+		this->TurtleJump.setTextureRect(rectSourceSprite); //setting the spesific turtle to the sprite
+		this->TurtleJump.setScale(-0.4, 0.4);
+		this->TurtleJump.setPosition(CurrentLocation);
 	
 	}
 	//--------------------------------------------------------------------------------------//
 	void Turtle::DrawTurtle()
 	{
-			this->ManagePtr->WindowGame.draw(this->MyTurtSprite); //drawing to screen
+		if (this->TurtleState == 1)
+		{
+			AnimateTurtleForward();
+			this->ManagePtr->WindowGame.draw(MyTurtSprite); //drawing to screen
+		}
+			else this->ManagePtr->WindowGame.draw(this->TurtleJump);
+			
 	}
 	//-------------------------------------------------------------------------------------//
-	void Turtle::AnimateTurtleForward() //flag=0,1,2,3
+	void Turtle::AnimateTurtleForward() //flag=0,1,2
 	{
 		
 		if (this->clock.getElapsedTime().asSeconds() > 0.6f/AnimationTurtles.size()) //Each frame we have the same time
 		{
-			if (AnimationIteratorFlag < 1) //if we have more frames in the array
+			if (AnimationIteratorFlag <2) //if we have more frames in the array
 			{
 				AnimationIteratorFlag++; //Moving to the next frame
 			}
@@ -51,7 +82,7 @@ namespace Olga
 				AnimationIteratorFlag = 0; //else we go back to the first turtle
 			}
 
-			MyTurtSprite.setTexture(AnimationTurtles.at(AnimationIteratorFlag));
+			this->MyTurtSprite=this->AnimationTurtles.at(AnimationIteratorFlag);
 			clock.restart(); //for each frame new clock measure
 
 		}
@@ -71,18 +102,28 @@ namespace Olga
 				AnimationIteratorFlag = 2; //else we go back to the first turtle
 			}
 
-			MyTurtSprite.setTexture(AnimationTurtles.at(AnimationIteratorFlag));
+			MyTurtSprite=AnimationTurtles.at(AnimationIteratorFlag);
 			clock.restart(); //for each frame new clock measure
 
 		}
 	}
 	//-----------------------------------------------------------------------------------//
-	sf::Sprite& Turtle::ReturnTurtleSprite()
+	void Turtle::MoveTurtleSprite()
 	{
-		return this->MyTurtSprite;
+		for (int i = 0; i < AnimationTurtles.size(); i++)
+		{
+			AnimationTurtles.at(i).move(2,0);
+		}
+		TurtleJump.move(2,0);
+		SetLocation(CurrentLocation.x+=2,CurrentLocation.y);
 
 	}
 	//----------------------------------------------------------------------------------//
+	sf::Sprite& Turtle::ReturnTurtleSprite()
+	{
+		return AnimationTurtles.at(AnimationIteratorFlag);
+	}
+	//--------------------------------------------------------------------------------//
 	sf::Vector2f& Turtle::ReturnLocation()
 	{
 		return this->CurrentLocation;
@@ -96,42 +137,96 @@ namespace Olga
 	//--------------------------------------------------------------------------------//
 	void Turtle::JumpUpdate(float fps)
 	{	
+		
 		if (this->TurtleState == 2 && this->CurrentLocation.y==250)//Jump pressed first time
 		{
-			//std::cout << "pos:\n" << this->MyTurtSprite.getPosition().y; //250
-			this->Velocity.y = -40;
-			this->MyTurtSprite.move(0, Velocity.y); //going to 40 neg
-			this->CurrentLocation.y = this->CurrentLocation.y - this->Velocity.y;
+			Velocity.x = 10;
+			this->Velocity.y = -200;
+			//---------------------------------------------------//
+			for (int i = 0; i < AnimationTurtles.size(); i++)
+			{
+				AnimationTurtles.at(i).move(0,Velocity.y);
+			}
+			this->TurtleJump.move(0, Velocity.y);
+			//---------------------------------------------------//
+			this->CurrentLocation.y = this->CurrentLocation.y - 200;
+			this->Velocity.y = 0;
+			
 		}
 		
-		if (this->JumpClock.getElapsedTime().asSeconds() > 0.40 && this->TurtleState==2)
+		if (this->JumpClock.getElapsedTime().asSeconds() > 1.0 && this->TurtleState==2)//when starts falling
 		{
 			this->JumpClock.restart();
 			this->TurtleState = 3;//falling
+			
 		}
 			
 		if (this->TurtleState == 3) //falling now
 		{
-		
-			this->MyTurtSprite.move(0,this->Velocity.y); //going to 50 positive
-			if (this->MyTurtSprite.getPosition().y < 250) //If im up
+			
+			//----------------X part:------------------------------------------//
+			if (this->HorizontalFlag == 1) //Falling horizontally
 			{
-				this->Velocity.y += Gravity; //starting falling down
-		
+				for (int i = 0; i < AnimationTurtles.size(); i++)
+				{
+					AnimationTurtles.at(i).move(Velocity.x,0);
+				}
+				this->TurtleJump.move(Velocity.x,0);
+				//--------------------------------------------------------------//
+				this->Velocity.x += 4.2; //starting falling down
+				//----------------Y part:-------------------------------------//
+				for (int i = 0; i < AnimationTurtles.size(); i++)
+				{
+					AnimationTurtles.at(i).move(0, Velocity.y);
+				}
+				this->TurtleJump.move(0, Velocity.y);
+				//--------------------------------------------------//
+				if (this->TurtleJump.getPosition().y < 250) //If im up
+				{
+					this->Velocity.y += 5; //starting falling down
+				}
+
+				else // if im on the ground
+				{
+					this->CurrentLocation.x = TurtleJump.getPosition().x;
+					this->CurrentLocation.y = 250;
+
+					TurtleJump.setPosition(TurtleJump.getPosition().x, 250);
+					HorizontalFlag = 0;
+					this->TurtleState = 1;//ground
+				}
 			}
-			else // if im on the ground
+			//----------------Y part:------------------------------------------//
+			else
 			{
-				//this->MyTurtSprite.setPosition(MyTurtSprite.getPosition().x, 250);
+				for (int i = 0; i < AnimationTurtles.size(); i++)
+				{
+					AnimationTurtles.at(i).move(0, Velocity.y);
+				}
+				this->TurtleJump.move(0, Velocity.y);
 				
-				this->CurrentLocation.x = MyTurtSprite.getPosition().x;
-				this->CurrentLocation.y = 250;
-				this->MyTurtSprite.setPosition(MyTurtSprite.getPosition().x,250);
-				this->TurtleState = 1;//ground
+				//--------------------------------------------------//
+				if (this->TurtleJump.getPosition().y < 250) //If im up
+				{
+					this->Velocity.y += 5; //starting falling down
+					//std::cout << "in" << TurtleJump.getPosition().y;
+				}
+
+				else // if im on the ground
+				{
+					this->CurrentLocation.x = TurtleJump.getPosition().x;
+					this->CurrentLocation.y = 250;
+				
+					TurtleJump.setPosition(TurtleJump.getPosition().x, 250);
+					for (int i = 0; i < AnimationTurtles.size(); i++)
+					{
+						AnimationTurtles.at(i).setPosition(TurtleJump.getPosition().x, 250);
+					}
+					this->TurtleState = 1;//ground
+				}
+
 			}
-		
-		
-		}
-		
+		} //Falling
 	}
 	//--------------------------------------------------------------------------------//
 	int Turtle::GetTurtleState()
@@ -157,5 +252,10 @@ namespace Olga
 	{
 		return this->forwardState;
 
+	}
+	//--------------------------------------------------------------------------------//
+	void Turtle::SetHorizontalFlag(int flag)
+	{
+		this->HorizontalFlag = flag;
 	}
 }
