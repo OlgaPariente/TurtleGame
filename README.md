@@ -1,11 +1,8 @@
-## TurtleGame
-This **README** file contains :
+# TurtleGame
 
-1. Information About the Game
-2. How to run
-3. Controls for game play
-4. Screenshots
+## About The Game
 
-# Running the program
+The game is similar to the famous game "Super Mario", in this game the main character is turtle.
+The goal of the turtle is to collect fruits and score as many points as possible.
 
-
+![Alt text](C:\Users\USER\Desktop\MyGame\screenshot1.png "FirstScreen")
