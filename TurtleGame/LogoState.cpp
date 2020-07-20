@@ -11,7 +11,7 @@ namespace Olga {
 	//---------------------------------------------------------------//
 	void LogoState::InitState()
 	{
-		this->GameManagPtr->GraphicManag.LoadTexture("Logo State", "C:/Users/USER/Desktop/MyGame/Logo.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("Logo State", "MyGameImg/Logo.png"); //Saving texture
 		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("Logo State"));
 		background.setPosition(130,55);
 	}

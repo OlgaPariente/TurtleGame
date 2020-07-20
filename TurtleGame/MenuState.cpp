@@ -14,8 +14,8 @@ namespace Olga {
 	void MenuState::InitState()
 	{
 		//Loading the textures to the map
-		this->GameManagPtr->GraphicManag.LoadTexture("Menu Background", "C:/Users/USER/Desktop/MyGame/menu.png");
-		this->GameManagPtr->GraphicManag.LoadTexture("Play Btn", "C:/Users/USER/Desktop/MyGame/play.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Menu Background", "MyGameImg/menu.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Play Btn", "MyGameImg/play.png");
 		//Setting the textures to the variables
 		this->Background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("Menu Background"));
 		this->PlayBtn.setTexture(this->GameManagPtr->GraphicManag.GetTexture("Play Btn"));

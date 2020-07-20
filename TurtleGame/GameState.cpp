@@ -15,26 +15,26 @@ namespace Olga {
 	void GameState::InitState()
 	{
 		//-----------------------Background---------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("back", "C:/Users/USER/Desktop/MyGame/background.jpg"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("back", "MyGameImg/background.jpg"); //Saving texture
 		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("back"));
 		this->GameManagPtr->GraphicManag.GetTexture("back").setRepeated(true);
 		this->background.setScale(0.98, 1.);
 		background.setTextureRect({ 0,0,3465,468 });
 		//-----------------------------------------------------------------------//
 		//-----------------------Ground-----------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("ground3", "C:/Users/USER/Desktop/MyGame/ground3.png"); //Saving texture
-		this->GameManagPtr->GraphicManag.LoadTexture("ground2", "C:/Users/USER/Desktop/MyGame/ground2.png"); //Saving texture
-		this->GameManagPtr->GraphicManag.LoadTexture("ground1", "C:/Users/USER/Desktop/MyGame/ground1.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("ground3", "MyGameImg/ground3.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("ground2", "MyGameImg/ground2.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("ground1", "MyGameImg/ground1.png"); //Saving texture
 		this->ground1 = new Ground(GameManagPtr);
 		ground1->CreateGround();
 		//-----------------------------------------------------------------------//
 		//-----------------------Turtle-----------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("Turtle", "C:/Users/USER/Desktop/MyGame/Turtle.png"); //Saving texture
+		this->GameManagPtr->GraphicManag.LoadTexture("Turtle", "MyGameImg/Turtle.png"); //Saving texture
 		this->turt = new Turtle(GameManagPtr);
 		//---------------------------------------------------------------------//
 		//-------------------------Fruits:------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("Fruits", "C:/Users/USER/Desktop/MyGame/Fruits.png");
-		this->GameManagPtr->GraphicManag.LoadTexture("Fruits2", "C:/Users/USER/Desktop/MyGame/FruitsTwo.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Fruits", "MyGameImg/Fruits.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Fruits2", "MyGameImg/FruitsTwo.png");
 
 		this->Fruit = new Fruits(GameManagPtr);
 		//---------------------------------------------------------------------//
