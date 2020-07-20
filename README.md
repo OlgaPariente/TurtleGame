@@ -8,3 +8,4 @@ The goal of the turtle is to collect fruits and score as many points as possible
 
 ![alt text](https://github.com/OlgaPariente/master/TurtleGame/blob/TurtleGame/MyGameImg/Logo.png?raw=true)
 ![Screenshot](Logo.png)
+![Image](https://github.com/OlgaPariente/master/TurtleGame/blob/TurtleGame/MyGameImg/Logo.png)
