@@ -6,4 +6,4 @@ The game is similar to the famous game "Super Mario", in this game the main char
 The goal of the turtle is to collect fruits and score as many points as possible.
 
 
-![alt text](https://github.com/OlgaPariente/TurtleGame/master/TurtleGame/MyGameImg/Logo.png?raw=true)
+![alt text](https://github.com/OlgaPariente/master/TurtleGame/TurtleGame/MyGameImg/Logo.png?raw=true)
