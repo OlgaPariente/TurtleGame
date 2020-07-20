@@ -1,4 +1,4 @@
-# TurtleGame
+## TurtleGame
 This **README** file contains :
 
 1. Information About the Game
@@ -6,5 +6,6 @@ This **README** file contains :
 3. Controls for game play
 4. Screenshots
 
-Alt
+# Running the program
+
 
