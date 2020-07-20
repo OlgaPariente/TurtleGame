@@ -7,6 +7,7 @@
 #include "Graphics.hpp"
 #include "Ground.hpp"
 #include "Turtle.hpp"
+#include "Fruits.hpp"
 
 namespace Olga
 {
@@ -27,6 +28,7 @@ namespace Olga
 		sf::Sprite background2;
 		Ground* ground1;
 		Turtle* turt;
+		Fruits* Fruit;
 		sf::View view;
 		sf::Vector2f posi;
 	};

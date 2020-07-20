@@ -33,8 +33,6 @@ void Ground::CreateGround()
 		
 		this->Grounds.push_back(ground);
 		this->Grounds.at(i).setTexture(this->ManagePtr->GraphicManag.GetTexture(name)); //ground sprite
-		//int X = () + 100;
-		//int Y = (rand() % (300-250+1)+250);
 		this->Grounds.at(i).setPosition(Locax, Locay);
 		Locax += 500;
 		Locay -= 40;

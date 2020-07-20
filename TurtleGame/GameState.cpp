@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "MenuState.hpp"
 #include <windows.h>
+#include "Fruits.hpp"
 
 
 namespace Olga {
@@ -30,6 +31,12 @@ namespace Olga {
 		//-----------------------Turtle-----------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("Turtle", "C:/Users/USER/Desktop/MyGame/Turtle.png"); //Saving texture
 		this->turt = new Turtle(GameManagPtr);
+		//---------------------------------------------------------------------//
+		//-------------------------Fruits:------------------------------------//
+		this->GameManagPtr->GraphicManag.LoadTexture("Fruits", "C:/Users/USER/Desktop/MyGame/Fruits.png");
+		this->GameManagPtr->GraphicManag.LoadTexture("Fruits2", "C:/Users/USER/Desktop/MyGame/FruitsTwo.png");
+
+		this->Fruit = new Fruits(GameManagPtr);
 		//---------------------------------------------------------------------//
 		//-------------------------Scrolling background------------------------//
 		view.reset(sf::FloatRect(0,0,697,468)); //Screen
@@ -101,9 +108,10 @@ namespace Olga {
 			view.setCenter(posi);
 			this->GameManagPtr->WindowGame.setView(view);
 		
-		this->GameManagPtr->WindowGame.clear(sf::Color::Red);
+		this->GameManagPtr->WindowGame.clear(sf::Color::Green);
 		this->GameManagPtr->WindowGame.draw(this->background);
 		this->ground1->DrawGround();
+		this->Fruit->DrawFruit();
 		this->turt->DrawTurtle();
 		this->GameManagPtr->WindowGame.display();
 		
