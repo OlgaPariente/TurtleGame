@@ -12,7 +12,7 @@ namespace Olga
 		Fruits(GameManagerPtr);
 		~Fruits();
 		void CreateFruit(int,int,int,int,int,int,std::string);
-		void DrawFruit();
+		void DrawFruit(int);
 
 
 
@@ -21,8 +21,6 @@ namespace Olga
 		std::vector<sf::Sprite> AllFruits;
 		GameManagerPtr ManagePtr;
 		sf::IntRect RectSprite;
-
-
 	};
 
 }

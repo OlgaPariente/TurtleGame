@@ -37,9 +37,10 @@ namespace Olga
 		float Gravity = 3.f;
 		sf::Clock JumpClock;
 		sf::Vector2f Velocity;
-		int TurtleState = 1; //ground=1, jump=2, falling=3
+		int TurtleState = 1; //ground=1, jump=2, falling=3, 
 		int HorizontalFlag=0;
 		sf::IntRect rectSourceSprite;
 		sf::Sprite TurtleJump;
+		int Platform = 0;
 	};
 }

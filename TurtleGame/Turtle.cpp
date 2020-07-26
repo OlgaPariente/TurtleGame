@@ -137,7 +137,8 @@ namespace Olga
 	//--------------------------------------------------------------------------------//
 	void Turtle::JumpUpdate(float fps)
 	{	
-		
+		//std::cout << "x:" << this->CurrentLocation.x;
+
 		if (this->TurtleState == 2 && this->CurrentLocation.y==250)//Jump pressed first time
 		{
 			Velocity.x = 10;
@@ -172,6 +173,7 @@ namespace Olga
 					AnimationTurtles.at(i).move(Velocity.x,0);
 				}
 				this->TurtleJump.move(Velocity.x,0);
+				//std::cout << "x:" << this->CurrentLocation.x;
 				//--------------------------------------------------------------//
 				this->Velocity.x += 4.2; //starting falling down
 				//----------------Y part:-------------------------------------//
@@ -181,17 +183,22 @@ namespace Olga
 				}
 				this->TurtleJump.move(0, Velocity.y);
 				//--------------------------------------------------//
-				if (this->TurtleJump.getPosition().y < 250) //If im up
+				if (this->TurtleJump.getPosition().y < 200) //If im up
 				{
 					this->Velocity.y += 5; //starting falling down
 				}
-
 				else // if im on the ground
 				{
 					this->CurrentLocation.x = TurtleJump.getPosition().x;
-					this->CurrentLocation.y = 250;
+					if ((this->CurrentLocation.x <= 600 && this->CurrentLocation.x >= 500) || (this->CurrentLocation.x <= 1200 && this->CurrentLocation.x >= 1000)
+						|| (this->CurrentLocation.x <= 1700 && this->CurrentLocation.x >= 1500) || (this->CurrentLocation.x <= 2200 && this->CurrentLocation.x >= 2000)) //platform
+					{
+						
+						this->CurrentLocation.y = 200;
+					}
+					else this->CurrentLocation.y = 250;
 
-					TurtleJump.setPosition(TurtleJump.getPosition().x, 250);
+					TurtleJump.setPosition(TurtleJump.getPosition().x, this->CurrentLocation.y);
 					HorizontalFlag = 0;
 					this->TurtleState = 1;//ground
 				}
@@ -199,28 +206,33 @@ namespace Olga
 			//----------------Y part:------------------------------------------//
 			else
 			{
-				for (int i = 0; i < AnimationTurtles.size(); i++)
+				//std::cout << "x" << this->TurtleJump.getPosition().x;
+				for (int i = 0; i < AnimationTurtles.size(); i++) //Jump up
 				{
 					AnimationTurtles.at(i).move(0, Velocity.y);
 				}
 				this->TurtleJump.move(0, Velocity.y);
 				
 				//--------------------------------------------------//
-				if (this->TurtleJump.getPosition().y < 250) //If im up
+				if (this->TurtleJump.getPosition().y < 200) //If im up
 				{
 					this->Velocity.y += 5; //starting falling down
-					//std::cout << "in" << TurtleJump.getPosition().y;
 				}
-
 				else // if im on the ground
 				{
 					this->CurrentLocation.x = TurtleJump.getPosition().x;
-					this->CurrentLocation.y = 250;
+					if ((this->CurrentLocation.x <= 600 && this->CurrentLocation.x >= 500) || (this->CurrentLocation.x <= 1200 && this->CurrentLocation.x >= 1000)
+						|| (this->CurrentLocation.x <= 1700 && this->CurrentLocation.x >= 1500) || (this->CurrentLocation.x <= 2200 && this->CurrentLocation.x >= 2000)) //platform					{
+					{	
+						//std::cout << "x:" << this->CurrentLocation.x;
+						this->CurrentLocation.y =200;
+					}
+					else this->CurrentLocation.y = 250;
 				
-					TurtleJump.setPosition(TurtleJump.getPosition().x, 250);
+					TurtleJump.setPosition(TurtleJump.getPosition().x, CurrentLocation.y);
 					for (int i = 0; i < AnimationTurtles.size(); i++)
 					{
-						AnimationTurtles.at(i).setPosition(TurtleJump.getPosition().x, 250);
+						AnimationTurtles.at(i).setPosition(TurtleJump.getPosition().x, this->CurrentLocation.y);
 					}
 					this->TurtleState = 1;//ground
 				}

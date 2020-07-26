@@ -10,10 +10,12 @@
 namespace Olga {
 	GameState::GameState(GameManagerPtr p) : GameManagPtr(p) //copy pointer in constructor
 	{
+		
 	}
 	//---------------------------------------------------------------//
 	void GameState::InitState()
 	{
+		this->indxFruit = 0;
 		//-----------------------Background---------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("back", "MyGameImg/background.jpg"); //Saving texture
 		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("back"));
@@ -44,6 +46,9 @@ namespace Olga {
 		view.setViewport(sf::FloatRect(0, 0, 1.0f, 1.0f)); //Full screen rectangle
 		this->posi.x = 697 / 2;
 		this->posi.y = 468 / 2;
+		//-------------------------------------------------------------------//
+		this->Score = 0;
+		
 	}
 	//---------------------------------------------------------------//
 	void GameState::HandleInput(float fps)
@@ -75,21 +80,47 @@ namespace Olga {
 				this->turt->JumpUpdate(fps);
 			}
 			//--------------------------------------------//
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If we pressed * Left *
+			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If we pressed * Left *
 			{
 
 				//this->turt->ReturnTurtleSprite().move(-5, 0);
 				this->turt->SetLocation(this->turt->ReturnLocation().x - 5, this->turt->ReturnLocation().y);
 				this->turt->AnimateTurtleBack();
 				this->turt->SetForwardState(0);
-			}
+			}*/
 		}
 	}
 	//---------------------------------------------------------------//
 	void GameState::Update(float fps) //Automatically updates of the game
 	{
 		this->turt->JumpUpdate(fps);
-		
+		//std::cout << "x" << this->turt->ReturnLocation().x;
+		//----------------------------------------------------------------------//
+		//------------Erase the fruits that we collect-------------------------//
+		if (this->turt->ReturnLocation().x==220 && this->turt->GetTurtleState()==1) //If the turtle touch the banana 
+		{
+			this->Score += 10;
+			this->indxFruit=1; //clear the banana from the screen
+		}
+		//-----------------------------------------//
+		if (this->turt->ReturnLocation().x <=600 && this->turt->ReturnLocation().x >= 500&& this->turt->ReturnLocation().y>=180 && this->turt->ReturnLocation().y<=300) //If the turtle touch the Coconut
+		{
+			this->Score += 10;
+			this->indxFruit = 2; //clear the coconut from the screen
+		}
+		//-----------------------------------------//
+		if (this->turt->ReturnLocation().x <= 810 && this->turt->ReturnLocation().x >= 800 && this->turt->GetTurtleState() == 1) //If the turtle touch the Ananas
+		{
+			this->Score += 10;
+			this->indxFruit = 3; //clear the Ananas from the screen
+		}
+		//-----------------------------------------//*
+		if (this->turt->ReturnLocation().x <= 810 && this->turt->ReturnLocation().x >= 800 && this->turt->GetTurtleState() == 1) //If the turtle touch the Peach
+		{
+			this->Score += 10;
+			this->indxFruit = 4; //clear the Peach from the screen
+		}
+		//-----------------------------------------//*
 	}
 	//---------------------------------------------------------------//
 
@@ -105,15 +136,13 @@ namespace Olga {
 				this->posi.x = 697 / 2;
 			}
 			
-			view.setCenter(posi);
-			this->GameManagPtr->WindowGame.setView(view);
-		
+		view.setCenter(posi);
+		this->GameManagPtr->WindowGame.setView(view);
 		this->GameManagPtr->WindowGame.clear(sf::Color::Green);
 		this->GameManagPtr->WindowGame.draw(this->background);
 		this->ground1->DrawGround();
-		this->Fruit->DrawFruit();
+		this->Fruit->DrawFruit(indxFruit);
 		this->turt->DrawTurtle();
 		this->GameManagPtr->WindowGame.display();
-		
 	}
 }

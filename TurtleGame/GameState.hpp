@@ -31,6 +31,9 @@ namespace Olga
 		Fruits* Fruit;
 		sf::View view;
 		sf::Vector2f posi;
+		int Score;
+		int indxFruit;
+		
 	};
 
 }

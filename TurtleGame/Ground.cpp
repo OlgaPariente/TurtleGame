@@ -24,7 +24,6 @@ void Ground::CreateGround()
 	srand(time(NULL));
 	for (int i = 0; i < 5; i++) //8 random grounds in the whole game 0,1,2
 	{
-		
 		switch (rand() % 3) {
 		case 0: name = "ground1"; break;
 		case 1: name = "ground2"; break;
@@ -36,7 +35,6 @@ void Ground::CreateGround()
 		this->Grounds.at(i).setPosition(Locax, Locay);
 		Locax += 500;
 		Locay -= 40;
-	
 	}
 }
 //---------------------------------------------//
