@@ -22,4 +22,4 @@ Game Over screen:
 * Controls : KeyBoard arrows- Left, Right, Up
 * Enemies :
 
-## Installation ;
+## Installation ;s
