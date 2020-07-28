@@ -5,6 +5,7 @@
 #include "MenuState.hpp"
 #include <windows.h>
 #include "Fruits.hpp"
+#include "GameOverState.hpp"
 
 
 namespace Olga {
@@ -17,9 +18,9 @@ namespace Olga {
 	{
 		this->indxFruit = 0;
 		//-----------------------Background---------------------------------------//
-		this->GameManagPtr->GraphicManag.LoadTexture("back", "MyGameImg/background.jpg"); //Saving texture
-		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("back"));
-		this->GameManagPtr->GraphicManag.GetTexture("back").setRepeated(true);
+		this->GameManagPtr->GraphicManag.LoadTexture("backG", "MyGameImg/background.jpg"); //Saving texture
+		background.setTexture(this->GameManagPtr->GraphicManag.GetTexture("backG"));
+		this->GameManagPtr->GraphicManag.GetTexture("backG").setRepeated(true);
 		this->background.setScale(0.98, 1.);
 		background.setTextureRect({ 0,0,3465,468 });
 		//-----------------------------------------------------------------------//
@@ -114,13 +115,17 @@ namespace Olga {
 			this->Score += 10;
 			this->indxFruit = 3; //clear the Ananas from the screen
 		}
-		//-----------------------------------------//*
+		//-----------------------------------------//
 		if (this->turt->ReturnLocation().x <= 810 && this->turt->ReturnLocation().x >= 800 && this->turt->GetTurtleState() == 1) //If the turtle touch the Peach
 		{
 			this->Score += 10;
 			this->indxFruit = 4; //clear the Peach from the screen
 		}
-		//-----------------------------------------//*
+		//-----------------------------------------//
+		//if (this->turt->ReturnLocation().x >=3000)
+		//{
+			//this->GameManagPtr->StateManag.AddState(StateRef(new GameOverState(GameManagPtr,this->Score)), true);
+		//}
 	}
 	//---------------------------------------------------------------//
 

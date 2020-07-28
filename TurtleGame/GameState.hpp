@@ -20,7 +20,6 @@ namespace Olga
 		void HandleInput(float fps);
 		void Update(float fps);
 		void Draw(int);
-		void Drawback();
 	private:
 		GameManagerPtr GameManagPtr;
 		sf::Clock clock;
