@@ -71,7 +71,7 @@ namespace Olga
 	void Turtle::AnimateTurtleForward() //flag=0,1,2
 	{
 		
-		if (this->clock.getElapsedTime().asSeconds() > 0.3f/AnimationTurtles.size()) //Each frame we have the same time
+		if (this->clock.getElapsedTime().asSeconds() > 0.4f/AnimationTurtles.size()) //Each frame we have the same time
 		{
 			if (AnimationIteratorFlag <2) //if we have more frames in the array
 			{

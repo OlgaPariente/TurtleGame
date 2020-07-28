@@ -15,7 +15,7 @@ namespace Olga {
 	void GameState::InitState()
 	{
 
-		this->Score = 1;
+		this->Score = 0;
 		this->indxFruit = 0;
 		//-----------------------Background---------------------------------------//
 		this->GameManagPtr->GraphicManag.LoadTexture("back", "MyGameImg/background.jpg"); //Saving texture
