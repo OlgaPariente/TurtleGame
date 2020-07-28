@@ -16,13 +16,13 @@ namespace Olga
 		this->CurrentLocation.x = 100;
 		this->CurrentLocation.y = 250;
 		//-------------------------First Turtle--------------------------------//
-		this->CreateTurtle(2325, 1700, 213, 293);
+		this->CreateTurtle(256, 56, 114, 146);
 		//-------------------------Second Turtle--------------------------------//
-		this->CreateTurtle(2764, 1700, 213, 293);
+		this->CreateTurtle(481, 60, 114, 140);
 		//-------------------------Third Turtle--------------------------------//
-		this->CreateTurtle(2977,1700,213,293);
+		this->CreateTurtle(589, 56,113, 143);
 		//-------------------------Jump Turtle--------------------------------//
-		this->CreateTurtleJump(1729, 2000, 230, 330);
+		this->CreateTurtleJump(25, 204, 113, 140);
 		//-----------------------------Putting different turtle any time---------------------//
 		this->MyTurtSprite=this->AnimationTurtles.at(AnimationIteratorFlag); //First turtle
 		//----------------------------------------------------------------------------------//
@@ -39,7 +39,7 @@ namespace Olga
 		this->rectSourceSprite.width = width;
 		this->rectSourceSprite.height = height;
 		this->MyTurtSprite.setTextureRect(rectSourceSprite); //setting the spesific turtle to the sprite
-		this->MyTurtSprite.setScale(-0.4, 0.4);
+		this->MyTurtSprite.setScale(-0.8, 0.8);
 		this->MyTurtSprite.setPosition(CurrentLocation);
 		this->AnimationTurtles.push_back(this->MyTurtSprite);
 	}
@@ -52,7 +52,7 @@ namespace Olga
 		this->rectSourceSprite.width = width;
 		this->rectSourceSprite.height = height;
 		this->TurtleJump.setTextureRect(rectSourceSprite); //setting the spesific turtle to the sprite
-		this->TurtleJump.setScale(-0.4, 0.4);
+		this->TurtleJump.setScale(-0.8, 0.8);
 		this->TurtleJump.setPosition(CurrentLocation);
 	
 	}
