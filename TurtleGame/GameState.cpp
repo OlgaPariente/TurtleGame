@@ -1,4 +1,5 @@
 #include "GameState.hpp"
+#include "GameOver.hpp"
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
@@ -121,10 +122,13 @@ namespace Olga {
 			this->indxFruit = 4; //clear the Peach from the screen
 		}
 		//-----------------------------------------//
-		//if (this->turt->ReturnLocation().x >=3000)
-		//{
-			//this->GameManagPtr->StateManag.AddState(StateRef(new GameOverState(GameManagPtr,this->Score)), true);
-		//}
+		if (this->turt->ReturnLocation().x >=2500)
+		{
+		
+
+			this->GameManagPtr->GraphicManag.TexturesMap.clear();
+			this->GameManagPtr->StateManag.AddState(StateRef(new GameOver(GameManagPtr)), true);
+		}
 
 	}
 	//---------------------------------------------------------------//

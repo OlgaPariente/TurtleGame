@@ -9,7 +9,7 @@ namespace Olga {
 	public:
 		Graphics() {};
 		~Graphics() {};
-
+		std::map<std::string, sf::Texture> TexturesMap;
 		void LoadTexture(std::string Name, std::string FileName); //Load texture from file
 		sf::Texture& GetTexture(std::string Name); //return refernce to texture from the map
 
@@ -20,7 +20,7 @@ namespace Olga {
 		//bool IsRightArrowClicked(sf::Sprite,sf::RenderWindow&);
 		//sf::Vector2i GetMousePosition(sf::RenderWindow& window); //Returning vector (x,y) with location
 	private:
-		std::map<std::string, sf::Texture> TexturesMap;
+		//std::map<std::string, sf::Texture> TexturesMap;
 		std::map<std::string, sf::Font> FontMap;
 	};
 }
