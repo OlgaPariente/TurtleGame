@@ -22,7 +22,6 @@ Game Over screen:</br>
 * Items : Random platforms, fruits
 * Controls : KeyBoard arrows- Left, Right, Up
 * Horizontal Jump : Up arrow & Right arrow
-* Enemies :
 
 ## Installation
 
