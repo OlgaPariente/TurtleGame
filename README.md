@@ -26,5 +26,5 @@ Game Over screen:</br>
 ## Installation
 
 1. Download SFML library
-2. Install the library in your environment (See [Guide for Visual Studio](https://www.sfml-dev.org/tutorials/2.5/start-vc.php)
+2. Install the library in your environment See [Guide for Visual Studio](https://www.sfml-dev.org/tutorials/2.5/start-vc.php)
 3. Download the project & open the solution (with the dll files that are attached) 
